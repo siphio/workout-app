@@ -45,3 +45,8 @@ tmpclaude-*
 
 # Supabase
 .supabase/
+
+# Serwist generated files
+public/sw.js
+public/sw.js.map
+public/swe-worker*.js
