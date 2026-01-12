@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.55",
+    "shadcn": "^3.6.3"
+  }
+}
