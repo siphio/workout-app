@@ -22,43 +22,43 @@ export default async function SummaryPage({ searchParams }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 px-6 pt-14 pb-12">
+    <main className="min-h-screen bg-zinc-950 px-5 py-8 flex flex-col justify-center">
       {/* Centered container - all content constrained to same width */}
-      <div className="max-w-[340px] mx-auto">
+      <div className="max-w-[380px] mx-auto w-full">
         {/* Success Icon */}
-        <div className="flex justify-center mb-4">
-          <div className="w-14 h-14 rounded-full bg-emerald-500 flex items-center justify-center">
-            <Check className="w-7 h-7 text-zinc-950" strokeWidth={3} />
+        <div className="flex justify-center mb-5">
+          <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center">
+            <Check className="w-8 h-8 text-zinc-950" strokeWidth={3} />
           </div>
         </div>
 
-        <h1 className="text-2xl font-bold text-white text-center tracking-wide mb-6">
+        <h1 className="text-[26px] font-bold text-white text-center tracking-wide mb-7">
           WORKOUT COMPLETE
         </h1>
 
         <ComparisonCard
           totalVolume={summaryData.totalVolume}
           comparison={summaryData.comparison}
-          className="mb-6"
+          className="mb-7"
         />
 
         <StatsRow
           durationMinutes={summaryData.durationMinutes}
           totalSets={summaryData.totalSets}
           totalExercises={summaryData.totalExercises}
-          className="mb-5"
+          className="mb-6"
         />
 
-        <PRList prs={summaryData.newPRs} className="mb-6" />
+        <PRList prs={summaryData.newPRs} className="mb-7" />
 
         {/* Buttons */}
-        <div className="space-y-3">
-          <button className="w-full bg-white text-zinc-950 font-semibold py-3 rounded-2xl border-2 border-zinc-300">
+        <div className="space-y-3.5">
+          <button className="w-full bg-white text-zinc-950 font-semibold py-3.5 rounded-2xl border-2 border-zinc-300">
             SHARE
           </button>
           <Link
             href="/"
-            className="block w-full bg-zinc-950 border-2 border-zinc-600 text-white font-semibold py-3 rounded-2xl text-center"
+            className="block w-full bg-zinc-950 border-2 border-zinc-600 text-white font-semibold py-3.5 rounded-2xl text-center"
           >
             DONE
           </Link>
