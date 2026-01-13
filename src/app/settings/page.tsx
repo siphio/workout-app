@@ -15,7 +15,7 @@ export default async function SettingsPage() {
     <main className="h-[100dvh] bg-zinc-950 overflow-y-auto">
       <PageHeader title="Settings" />
 
-      <div className="px-6 pb-24 space-y-6">
+      <div className="px-6 pb-32 space-y-6">
         <ProfileSection />
         <PreferencesSection settings={settings} />
         <NotificationsSection settings={settings} />

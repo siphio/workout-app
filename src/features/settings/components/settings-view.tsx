@@ -16,7 +16,7 @@ export function SettingsView({ settings }: Props) {
     <div className="h-full bg-zinc-950 overflow-y-auto">
       <PageHeader title="Settings" />
 
-      <div className="px-6 pb-24 space-y-6">
+      <div className="px-6 pb-32 space-y-6">
         <ProfileSection />
         <PreferencesSection settings={settings} />
         <NotificationsSection settings={settings} />

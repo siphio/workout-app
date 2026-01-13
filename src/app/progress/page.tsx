@@ -21,7 +21,7 @@ export default async function ProgressPage({ searchParams }: PageProps) {
     <main className="h-[100dvh] bg-zinc-950 overflow-y-auto">
       <PageHeader title="Progress" />
 
-      <div className="px-6 pb-24 space-y-5">
+      <div className="px-6 pb-32 space-y-5">
         <StreakCard streakWeeks={progressData.streakWeeks} />
 
         <div>

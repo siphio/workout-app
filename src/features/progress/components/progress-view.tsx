@@ -17,7 +17,7 @@ export function ProgressView({ data, timeRange }: Props) {
     <div className="h-full bg-zinc-950 overflow-y-auto">
       <PageHeader title="Progress" />
 
-      <div className="px-6 pb-24 space-y-5">
+      <div className="px-6 pb-32 space-y-5">
         <StreakCard streakWeeks={data.streakWeeks} />
 
         <div>

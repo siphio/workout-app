@@ -16,14 +16,14 @@ export function BottomTabBar() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 flex justify-center"
-      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 8px) + 8px)" }}
+      className="fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-8"
+      style={{ paddingBottom: "max(env(safe-area-inset-bottom, 0px), 8px)" }}
     >
       <div
-        className="flex items-center justify-center gap-2 px-6 h-12 bg-zinc-900/70 border border-zinc-700/50 rounded-full shadow-lg shadow-black/20"
+        className="flex items-center justify-center gap-1 px-4 h-14 bg-zinc-900/80 border border-zinc-700/50 rounded-full shadow-lg shadow-black/30"
         style={{
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
         }}
       >
         {tabs.map((tab) => {
