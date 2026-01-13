@@ -21,8 +21,11 @@ export function SwipeableHome({ cyclePosition, currentDay, progressData, userSet
 
   return (
     <div className="h-[100dvh] w-screen overflow-hidden">
-      {/* Page indicator */}
-      <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2">
+      {/* Page indicator - positioned below iPhone notch */}
+      <div
+        className="fixed left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2"
+        style={{ top: "max(env(safe-area-inset-top, 12px) + 8px, 56px)" }}
+      >
         {/* Page label */}
         <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
           {PAGE_LABELS[currentPage]}

@@ -14,7 +14,10 @@ export function PageHeader({ title, backHref, showSettings, leftAligned, classNa
   // Left-aligned layout (for pages like Progress)
   if (leftAligned) {
     return (
-      <header className={cn("flex items-center justify-between px-6 pt-4 pb-4", className)}>
+      <header
+        className={cn("flex items-center justify-between px-6 pb-4", className)}
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 16px) + 56px)" }}
+      >
         <h1 className="text-[32px] font-bold text-white tracking-tight">{title}</h1>
         {showSettings && (
           <Link href="/settings" className="w-11 h-11 flex items-center justify-center -mr-2">
@@ -27,7 +30,10 @@ export function PageHeader({ title, backHref, showSettings, leftAligned, classNa
 
   // Centered layout (default)
   return (
-    <header className={cn("flex items-center justify-between px-6 py-4", className)}>
+    <header
+      className={cn("flex items-center justify-between px-6 pb-4", className)}
+      style={{ paddingTop: "calc(env(safe-area-inset-top, 16px) + 16px)" }}
+    >
       {backHref ? (
         <Link href={backHref} className="w-10 h-10 flex items-center justify-center -ml-2">
           <ArrowLeft className="w-6 h-6 text-white" />

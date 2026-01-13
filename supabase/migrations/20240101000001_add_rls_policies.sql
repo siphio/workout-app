@@ -32,6 +32,7 @@ CREATE POLICY "Allow public update for workout_logs" ON workout_logs FOR UPDATE 
 CREATE POLICY "Allow public read for set_logs" ON set_logs FOR SELECT USING (true);
 CREATE POLICY "Allow public insert for set_logs" ON set_logs FOR INSERT WITH CHECK (true);
 CREATE POLICY "Allow public update for set_logs" ON set_logs FOR UPDATE USING (true);
+CREATE POLICY "Allow public delete for set_logs" ON set_logs FOR DELETE USING (true);
 
 -- Personal records table
 CREATE POLICY "Allow public read for personal_records" ON personal_records FOR SELECT USING (true);

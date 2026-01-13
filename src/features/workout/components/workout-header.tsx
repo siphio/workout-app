@@ -14,7 +14,10 @@ interface Props {
 
 export function WorkoutHeader({ workoutTypeName, formattedTime, isPaused, onTogglePause, className }: Props) {
   return (
-    <header className={cn("relative flex items-center justify-center px-4 py-3", className)}>
+    <header
+      className={cn("relative flex items-center justify-center px-4 pb-3", className)}
+      style={{ paddingTop: "calc(env(safe-area-inset-top, 12px) + 12px)" }}
+    >
       <Link href="/" className="absolute left-4 w-11 h-11 flex items-center justify-center">
         <ArrowLeft className="w-6 h-6 text-white" />
       </Link>
