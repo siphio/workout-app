@@ -21,7 +21,7 @@ export function HomeView({ cyclePosition, currentDay }: Props) {
       </div>
 
       {/* Floating Bottom Card */}
-      <div className="absolute bottom-8 left-4 right-4">
+      <div className="absolute bottom-20 left-4 right-4">
         <div className="bg-zinc-900/95 backdrop-blur-xl rounded-[32px] px-7 pt-4 pb-8 shadow-2xl border border-zinc-800/50">
           {/* Pill Handle */}
           <div className="flex justify-center mb-6">
