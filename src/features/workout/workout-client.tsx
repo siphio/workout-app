@@ -59,9 +59,9 @@ export function WorkoutClient({ initialState, userSettings }: Props) {
     <main className="min-h-screen bg-zinc-950 pb-32">
       <WorkoutHeader workoutTypeName={state.workoutTypeName} formattedTime={elapsedTime} isPaused={isPaused} onTogglePause={togglePause} />
 
-      <SwipeContainer currentIndex={state.currentExerciseIndex} totalCount={state.exercises.length} onNext={nextExercise} onPrev={prevExercise} className="px-6 py-6">
+      <SwipeContainer currentIndex={state.currentExerciseIndex} totalCount={state.exercises.length} onNext={nextExercise} onPrev={prevExercise} className="px-5 py-4">
         <ExerciseCard name={currentExercise.name} currentIndex={state.currentExerciseIndex} totalExercises={state.exercises.length} className="mb-4" />
-        <VideoPlaceholder className="mb-6" />
+        <VideoPlaceholder className="mb-5" />
         <SetTable
           exercise={currentExercise}
           onWeightChange={(idx, val) => updateSetValue(state.currentExerciseIndex, idx, "weight", val)}
@@ -70,16 +70,18 @@ export function WorkoutClient({ initialState, userSettings }: Props) {
           onAddSet={() => addSet(state.currentExerciseIndex)}
           weightUnit={userSettings.weightUnit.toUpperCase()}
         />
-        <div className="flex items-center gap-2 mt-6 text-zinc-400">
-          <span className="text-lg">≡</span>
-          <span className="text-sm">Add note...</span>
-        </div>
       </SwipeContainer>
 
-      <RestTimer isActive={restTimer.isActive} formattedTime={restTimer.formattedTime} progress={restTimer.progress} onSkip={restTimer.skip} />
+      <RestTimer
+        isActive={restTimer.isActive}
+        formattedTime={restTimer.formattedTime}
+        progress={restTimer.progress}
+        defaultRestSeconds={currentExercise?.rest_seconds ?? userSettings.defaultRestSeconds}
+        onSkip={restTimer.skip}
+      />
 
       {isWorkoutComplete() && !restTimer.isActive && (
-        <div className="fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800 px-6 py-4 pb-8">
+        <div className="fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800 px-5 py-4 pb-8">
           <button onClick={handleFinishWorkout} disabled={isCompleting} className="w-full bg-emerald-500 text-white font-semibold py-4 rounded-xl hover:bg-emerald-600 disabled:opacity-50">
             {isCompleting ? "Completing..." : "FINISH WORKOUT"}
           </button>

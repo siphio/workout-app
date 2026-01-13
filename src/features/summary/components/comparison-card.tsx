@@ -15,9 +15,9 @@ export function ComparisonCard({ totalVolume, comparison, weightUnit = "kg", cla
     : "/images/comparisons/trex.png";
 
   return (
-    <div className={cn("bg-zinc-900 rounded-2xl p-6", className)}>
-      <div className="flex justify-center mb-4">
-        <div className="w-48 h-48 relative">
+    <div className={cn("bg-zinc-900 rounded-2xl py-5 px-6", className)}>
+      <div className="flex justify-center mb-2">
+        <div className="w-40 h-40 relative">
           <Image
             src={imageSrc}
             alt={comparison?.comparison_name ?? "Weight comparison"}
@@ -26,8 +26,8 @@ export function ComparisonCard({ totalVolume, comparison, weightUnit = "kg", cla
           />
         </div>
       </div>
-      <p className="text-zinc-400 text-center mb-2">You lifted</p>
-      <p className="text-stat font-bold text-white text-center mb-2">
+      <p className="text-zinc-500 text-center text-sm mb-1">You lifted</p>
+      <p className="text-4xl font-bold text-white text-center mb-1">
         {totalVolume.toLocaleString()} {weightUnit}
       </p>
       {comparison && (

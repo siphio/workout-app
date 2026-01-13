@@ -26,8 +26,8 @@ export function SetInput({ value, onChange, autoFocus = false, className }: Prop
       onChange={(e) => onChange(e.target.value === "" ? null : parseFloat(e.target.value))}
       placeholder="—"
       className={cn(
-        "bg-zinc-800 rounded-lg px-3 py-2 text-white text-center w-full",
-        "border border-transparent focus:border-emerald-500 focus:outline-none",
+        "bg-zinc-800 rounded-lg px-3 py-2 text-white text-center text-base w-full",
+        "border border-zinc-700 focus:border-emerald-500 focus:outline-none",
         "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
         className
       )}

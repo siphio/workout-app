@@ -81,3 +81,57 @@ SELECT
   120
 FROM exercises e
 WHERE e.name = 'Barbell Back Squat';
+
+-- Insert a completed workout for testing summary page
+INSERT INTO workout_logs (id, user_id, workout_type_id, started_at, completed_at, total_volume, duration_seconds)
+VALUES (
+  '20000000-0000-0000-0000-000000000001',
+  '00000000-0000-0000-0000-000000000001',
+  '10000000-0000-0000-0000-000000000001',
+  NOW() - INTERVAL '1 hour',
+  NOW(),
+  9840.00,
+  3420
+);
+
+-- Insert set logs for the completed workout (Push Day exercises)
+INSERT INTO set_logs (workout_log_id, exercise_id, set_number, weight, reps, is_pr, completed_at)
+SELECT
+  '20000000-0000-0000-0000-000000000001',
+  e.id,
+  s.set_num,
+  CASE
+    WHEN e.name = 'Barbell Bench Press' THEN 80
+    WHEN e.name = 'Seated Dumbbell Shoulder Press' THEN 24
+    WHEN e.name = 'Incline Dumbbell Press' THEN 26
+    WHEN e.name = 'Cable Lateral Raises' THEN 10
+    WHEN e.name = 'Tricep Pushdowns (Rope)' THEN 25
+    WHEN e.name = 'Overhead Tricep Extension' THEN 20
+  END,
+  CASE
+    WHEN e.name = 'Barbell Bench Press' THEN 8
+    WHEN e.name = 'Seated Dumbbell Shoulder Press' THEN 10
+    WHEN e.name = 'Incline Dumbbell Press' THEN 10
+    WHEN e.name = 'Cable Lateral Raises' THEN 15
+    WHEN e.name = 'Tricep Pushdowns (Rope)' THEN 12
+    WHEN e.name = 'Overhead Tricep Extension' THEN 12
+  END,
+  CASE WHEN e.name = 'Barbell Bench Press' AND s.set_num = 1 THEN true ELSE false END,
+  NOW() - INTERVAL '50 minutes' + (e.display_order * INTERVAL '8 minutes') + (s.set_num * INTERVAL '2 minutes')
+FROM exercises e
+CROSS JOIN (SELECT generate_series(1, 4) AS set_num) s
+WHERE e.workout_type_id = '10000000-0000-0000-0000-000000000001'
+  AND s.set_num <= e.default_sets;
+
+-- Insert a PR for Bench Press
+INSERT INTO personal_records (user_id, exercise_id, pr_type, value, reps, achieved_at, workout_log_id)
+SELECT
+  '00000000-0000-0000-0000-000000000001',
+  e.id,
+  'max_weight',
+  80,
+  8,
+  NOW(),
+  '20000000-0000-0000-0000-000000000001'
+FROM exercises e
+WHERE e.name = 'Barbell Bench Press';

@@ -22,44 +22,47 @@ export default async function SummaryPage({ searchParams }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 px-6 py-12">
-      {/* Success Icon */}
-      <div className="flex justify-center mb-4">
-        <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center">
-          <Check className="w-8 h-8 text-white" strokeWidth={3} />
+    <main className="min-h-screen bg-zinc-950 px-6 pt-14 pb-12">
+      {/* Centered container - all content constrained to same width */}
+      <div className="max-w-[340px] mx-auto">
+        {/* Success Icon */}
+        <div className="flex justify-center mb-4">
+          <div className="w-14 h-14 rounded-full bg-emerald-500 flex items-center justify-center">
+            <Check className="w-7 h-7 text-zinc-950" strokeWidth={3} />
+          </div>
         </div>
-      </div>
 
-      <h1 className="text-2xl font-bold text-white text-center mb-8">
-        WORKOUT COMPLETE
-      </h1>
+        <h1 className="text-2xl font-bold text-white text-center tracking-wide mb-6">
+          WORKOUT COMPLETE
+        </h1>
 
-      <ComparisonCard
-        totalVolume={summaryData.totalVolume}
-        comparison={summaryData.comparison}
-        className="mb-6"
-      />
+        <ComparisonCard
+          totalVolume={summaryData.totalVolume}
+          comparison={summaryData.comparison}
+          className="mb-6"
+        />
 
-      <StatsRow
-        durationMinutes={summaryData.durationMinutes}
-        totalSets={summaryData.totalSets}
-        totalExercises={summaryData.totalExercises}
-        className="mb-6"
-      />
+        <StatsRow
+          durationMinutes={summaryData.durationMinutes}
+          totalSets={summaryData.totalSets}
+          totalExercises={summaryData.totalExercises}
+          className="mb-5"
+        />
 
-      <PRList prs={summaryData.newPRs} className="mb-8" />
+        <PRList prs={summaryData.newPRs} className="mb-6" />
 
-      {/* Buttons */}
-      <div className="space-y-3">
-        <button className="w-full bg-white text-zinc-950 font-semibold py-4 px-6 rounded-xl">
-          SHARE
-        </button>
-        <Link
-          href="/"
-          className="block w-full border border-zinc-700 text-white font-semibold py-4 px-6 rounded-xl text-center"
-        >
-          DONE
-        </Link>
+        {/* Buttons */}
+        <div className="space-y-3">
+          <button className="w-full bg-white text-zinc-950 font-semibold py-3 rounded-2xl border-2 border-zinc-300">
+            SHARE
+          </button>
+          <Link
+            href="/"
+            className="block w-full bg-zinc-950 border-2 border-zinc-600 text-white font-semibold py-3 rounded-2xl text-center"
+          >
+            DONE
+          </Link>
+        </div>
       </div>
     </main>
   );

@@ -20,7 +20,7 @@ interface Props {
 export function PreferencesSection({ settings, className }: Props) {
   return (
     <div className={cn("", className)}>
-      <h2 className="text-label font-medium text-zinc-400 uppercase tracking-wide mb-3">
+      <h2 className="text-label font-medium text-emerald-500 uppercase tracking-wide mb-3">
         WORKOUT PREFERENCES
       </h2>
       <div className="bg-zinc-900 rounded-2xl divide-y divide-zinc-800">

@@ -14,15 +14,15 @@ interface Props {
 
 export function WorkoutHeader({ workoutTypeName, formattedTime, isPaused, onTogglePause, className }: Props) {
   return (
-    <header className={cn("flex items-center justify-between px-6 py-4 border-b border-zinc-800", className)}>
-      <Link href="/" className="w-10 h-10 flex items-center justify-center -ml-2">
+    <header className={cn("relative flex items-center justify-center px-4 py-3", className)}>
+      <Link href="/" className="absolute left-4 w-11 h-11 flex items-center justify-center">
         <ArrowLeft className="w-6 h-6 text-white" />
       </Link>
-      <h1 className="text-lg font-semibold text-white uppercase">{workoutTypeName} DAY</h1>
-      <div className="flex items-center gap-2">
-        <span className="text-emerald-500 font-mono text-lg">{formattedTime}</span>
-        <button onClick={onTogglePause} className="w-10 h-10 flex items-center justify-center -mr-2">
-          {isPaused ? <Play className="w-5 h-5 text-emerald-500" /> : <Pause className="w-5 h-5 text-emerald-500" />}
+      <h1 className="text-base font-semibold text-white uppercase tracking-wide">{workoutTypeName} DAY</h1>
+      <div className="absolute right-4 flex items-center gap-1">
+        <span className="text-emerald-500 font-mono text-lg font-semibold">{formattedTime}</span>
+        <button onClick={onTogglePause} className="w-11 h-11 flex items-center justify-center">
+          {isPaused ? <Play className="w-5 h-5 text-emerald-500 fill-emerald-500" /> : <Pause className="w-5 h-5 text-emerald-500 fill-emerald-500" />}
         </button>
       </div>
     </header>

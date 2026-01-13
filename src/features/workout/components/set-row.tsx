@@ -22,33 +22,57 @@ export function SetRow({ set, previousSet, isActive, onWeightChange, onRepsChang
 
   return (
     <div className={cn(
-      "grid grid-cols-5 gap-2 items-center py-3 px-2",
-      isActive && "border-l-4 border-emerald-500 bg-zinc-900/50 -ml-1 pl-3"
+      "grid grid-cols-[40px_1fr_1fr_1fr_48px] gap-2 items-center py-3 px-1 rounded-lg",
+      isActive && "border-l-4 border-emerald-500 bg-zinc-800/60 -ml-1 pl-3"
     )}>
-      <span className={cn("text-base", isCompleted && "text-white", isActive && "text-white font-medium", isUpcoming && "text-zinc-500")}>
+      {/* Set number */}
+      <span className={cn(
+        "text-base font-medium",
+        isCompleted && "text-white",
+        isActive && "text-white",
+        isUpcoming && "text-zinc-500"
+      )}>
         {set.setNumber}
       </span>
-      <span className="text-zinc-400 text-sm">{previousDisplay}</span>
 
+      {/* Previous */}
+      <span className={cn(
+        "text-sm text-center",
+        isCompleted ? "text-zinc-300" : "text-zinc-400"
+      )}>
+        {previousDisplay}
+      </span>
+
+      {/* Weight */}
       {isActive ? (
-        <SetInput value={set.weight} onChange={onWeightChange} autoFocus />
+        <SetInput value={set.weight} onChange={onWeightChange} autoFocus className="h-11" />
       ) : (
-        <div className={cn("text-center py-2", isCompleted && "text-white", isUpcoming && "text-zinc-500")}>
+        <div className={cn(
+          "text-center text-base",
+          isCompleted && "text-white font-medium",
+          isUpcoming && "text-zinc-500"
+        )}>
           {set.weight ?? "—"}
         </div>
       )}
 
+      {/* Reps */}
       {isActive ? (
-        <SetInput value={set.reps} onChange={onRepsChange} />
+        <SetInput value={set.reps} onChange={onRepsChange} className="h-11" />
       ) : (
-        <div className={cn("text-center py-2", isCompleted && "text-white", isUpcoming && "text-zinc-500")}>
+        <div className={cn(
+          "text-center text-base",
+          isCompleted && "text-white font-medium",
+          isUpcoming && "text-zinc-500"
+        )}>
           {set.reps ?? "—"}
         </div>
       )}
 
+      {/* Complete button */}
       <div className="flex justify-center">
         {isCompleted ? (
-          <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">
+          <div className="w-11 h-11 flex items-center justify-center">
             <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center">
               <Check className="w-4 h-4 text-white" strokeWidth={3} />
             </div>
@@ -56,14 +80,14 @@ export function SetRow({ set, previousSet, isActive, onWeightChange, onRepsChang
         ) : isActive && canComplete ? (
           <button
             onClick={(e) => { e.stopPropagation(); onComplete(); }}
-            className="min-w-[44px] min-h-[44px] flex items-center justify-center"
+            className="w-11 h-11 flex items-center justify-center"
           >
-            <div className="w-7 h-7 rounded-full border-2 border-emerald-500 flex items-center justify-center hover:bg-emerald-500/20">
+            <div className="w-7 h-7 rounded-full border-2 border-emerald-500 flex items-center justify-center hover:bg-emerald-500/20 transition-colors">
               <Check className="w-4 h-4 text-emerald-500" strokeWidth={3} />
             </div>
           </button>
         ) : (
-          <div className="min-w-[44px] min-h-[44px] flex items-center justify-center">
+          <div className="w-11 h-11 flex items-center justify-center">
             <div className="w-7 h-7 rounded-full border-2 border-zinc-600" />
           </div>
         )}

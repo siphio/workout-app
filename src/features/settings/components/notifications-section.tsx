@@ -61,7 +61,7 @@ export function NotificationsSection({ settings, className }: Props) {
   if (!isSupported) {
     return (
       <div className={cn("", className)}>
-        <h2 className="text-label font-medium text-zinc-400 uppercase tracking-wide mb-3">
+        <h2 className="text-label font-medium text-emerald-500 uppercase tracking-wide mb-3">
           NOTIFICATIONS
         </h2>
         <div className="bg-zinc-900 rounded-2xl p-5">
@@ -75,7 +75,7 @@ export function NotificationsSection({ settings, className }: Props) {
 
   return (
     <div className={cn("", className)}>
-      <h2 className="text-label font-medium text-zinc-400 uppercase tracking-wide mb-3">
+      <h2 className="text-label font-medium text-emerald-500 uppercase tracking-wide mb-3">
         NOTIFICATIONS
       </h2>
       <div className="bg-zinc-900 rounded-2xl divide-y divide-zinc-800">

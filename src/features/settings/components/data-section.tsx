@@ -30,13 +30,13 @@ export function DataSection({ className }: Props) {
 
   return (
     <div className={cn("", className)}>
-      <h2 className="text-label font-medium text-zinc-400 uppercase tracking-wide mb-3">
+      <h2 className="text-label font-medium text-emerald-500 uppercase tracking-wide mb-3">
         DATA
       </h2>
       <div className="bg-zinc-900 rounded-2xl divide-y divide-zinc-800">
         <button className="flex items-center justify-between px-5 py-4 w-full">
           <span className="text-white">Export Workout Data</span>
-          <ChevronRight className="w-5 h-5 text-zinc-400" />
+          <ChevronRight className="w-5 h-5 text-emerald-500" />
         </button>
         <button
           onClick={handleClearData}
