@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 interface Props {
   cyclePosition: number;
   currentDay: string;
@@ -7,7 +9,7 @@ interface Props {
 
 export function HomeView({ cyclePosition, currentDay }: Props) {
   return (
-    <div className="min-h-screen bg-zinc-950 relative overflow-hidden">
+    <div className="h-full bg-zinc-950 relative overflow-hidden">
       {/* Hero Background - Full screen with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-emerald-950/30">
         {/* Geometric pattern */}
@@ -36,12 +38,12 @@ export function HomeView({ cyclePosition, currentDay }: Props) {
             Marley
           </p>
 
-          <a
+          <Link
             href="/workout"
-            className="flex items-center justify-center w-full bg-white text-zinc-950 text-lg font-semibold py-5 px-6 rounded-2xl hover:bg-zinc-100 active:scale-[0.98] transition-all min-h-[64px]"
+            className="flex items-center justify-center w-full bg-white text-zinc-950 text-lg font-semibold py-5 px-6 rounded-2xl hover:bg-zinc-100 active:scale-[0.98] transition-all min-h-[64px] touch-manipulation"
           >
             START WORKOUT &nbsp;→
-          </a>
+          </Link>
 
           {/* Cycle Dots */}
           <div className="flex justify-center gap-3 mt-8">

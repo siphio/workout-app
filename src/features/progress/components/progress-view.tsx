@@ -14,7 +14,7 @@ interface Props {
 
 export function ProgressView({ data, timeRange }: Props) {
   return (
-    <div className="min-h-screen bg-zinc-950 pb-24">
+    <div className="min-h-full bg-zinc-950 pb-24">
       <PageHeader title="PROGRESS" showSettings leftAligned />
 
       <div className="px-6 space-y-5">

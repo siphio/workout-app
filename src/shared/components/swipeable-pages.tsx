@@ -57,7 +57,7 @@ export function SwipeablePages({ children, initialPage = 0, onPageChange, classN
       {children.map((child, index) => (
         <div
           key={index}
-          className="min-w-full w-full flex-shrink-0 snap-start snap-always"
+          className="min-w-full w-full h-full flex-shrink-0 snap-start snap-always overflow-y-auto"
         >
           {child}
         </div>

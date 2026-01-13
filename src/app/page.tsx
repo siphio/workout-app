@@ -1,5 +1,6 @@
 import { SwipeableHome } from "@/features/home/components";
 import { getProgressData } from "@/features/progress/lib/progress-queries";
+import { getUserSettings } from "@/features/settings/actions/settings-actions";
 
 export default async function HomePage() {
   // Temporarily hardcoded for testing
@@ -7,14 +8,18 @@ export default async function HomePage() {
   const workoutDays = ["PUSH", "PULL", "LEGS", "REST"];
   const currentDay = workoutDays[cyclePosition];
 
-  // Pre-fetch progress data for seamless swiping
-  const progressData = await getProgressData("3M");
+  // Pre-fetch all data for seamless swiping
+  const [progressData, userSettings] = await Promise.all([
+    getProgressData("3M"),
+    getUserSettings(),
+  ]);
 
   return (
     <SwipeableHome
       cyclePosition={cyclePosition}
       currentDay={currentDay}
       progressData={progressData}
+      userSettings={userSettings}
     />
   );
 }
