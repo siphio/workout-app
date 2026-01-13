@@ -102,8 +102,8 @@ async function getMainLiftPRs(supabase: any): Promise<ProgressData["personalReco
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function getVolumeHistory(supabase: any, timeRange: "1M" | "3M" | "1Y"): Promise<VolumeDataPoint[]> {
   const startDate = new Date();
-  if (timeRange === "1M") startDate.setMonth(startDate.getMonth() - 1);
-  else if (timeRange === "3M") startDate.setMonth(startDate.getMonth() - 3);
+  if (timeRange === "1M") startDate.setDate(startDate.getDate() - 30);
+  else if (timeRange === "3M") startDate.setDate(startDate.getDate() - 90);
   else startDate.setFullYear(startDate.getFullYear() - 1);
 
   const { data: workouts } = await supabase
@@ -116,17 +116,46 @@ async function getVolumeHistory(supabase: any, timeRange: "1M" | "3M" | "1Y"): P
 
   if (!workouts) return [];
 
+  // For 1Y view, aggregate by month; otherwise aggregate by week
+  if (timeRange === "1Y") {
+    const monthlyVolume = new Map<string, number>();
+    for (const w of workouts) {
+      const d = new Date(w.completed_at);
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      monthlyVolume.set(key, (monthlyVolume.get(key) ?? 0) + Number(w.total_volume ?? 0));
+    }
+
+    return Array.from(monthlyVolume.entries()).map(([key, volume]) => {
+      const [year, month] = key.split("-");
+      const d = new Date(Number(year), Number(month) - 1, 1);
+      return {
+        date: key,
+        volume: Math.round(volume),
+        label: d.toLocaleDateString("en-US", { month: "short" }),
+      };
+    });
+  }
+
+  // For 3M and 1M, aggregate by week
   const weeklyVolume = new Map<string, number>();
   for (const w of workouts) {
     const key = getWeekStart(new Date(w.completed_at)).toISOString().split("T")[0];
     weeklyVolume.set(key, (weeklyVolume.get(key) ?? 0) + Number(w.total_volume ?? 0));
   }
 
-  return Array.from(weeklyVolume.entries()).map(([date, volume]) => ({
-    date,
-    volume: Math.round(volume),
-    label: new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-  }));
+  return Array.from(weeklyVolume.entries()).map(([date, volume]) => {
+    const d = new Date(date);
+    // For 3M: show month name only; For 1M: show "Mon Day" format
+    const label = timeRange === "3M"
+      ? d.toLocaleDateString("en-US", { month: "short" })
+      : d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+    return {
+      date,
+      volume: Math.round(volume),
+      label,
+    };
+  });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

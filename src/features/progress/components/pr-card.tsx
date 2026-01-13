@@ -10,11 +10,11 @@ interface Props {
 
 export function PRCard({ pr, label, weightUnit = "kg", className }: Props) {
   return (
-    <div className={cn("bg-zinc-900 rounded-xl p-4 text-center", className)}>
-      <p className="text-zinc-400 text-sm mb-1">{label}</p>
+    <div className={cn("bg-zinc-900 rounded-xl px-3 py-4 text-center", className)}>
+      <p className="text-zinc-500 text-sm mb-2">{label}</p>
       {pr ? (
         <>
-          <p className="text-xl font-bold text-white">
+          <p className="text-2xl font-bold text-white mb-1">
             {pr.currentWeight} {weightUnit}
           </p>
           {pr.delta && pr.delta > 0 ? (
@@ -25,7 +25,7 @@ export function PRCard({ pr, label, weightUnit = "kg", className }: Props) {
         </>
       ) : (
         <>
-          <p className="text-xl font-bold text-zinc-600">— {weightUnit}</p>
+          <p className="text-2xl font-bold text-zinc-600 mb-1">— {weightUnit}</p>
           <p className="text-zinc-600 text-sm">No PR yet</p>
         </>
       )}
