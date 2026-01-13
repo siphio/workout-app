@@ -109,6 +109,15 @@ body {
 
 /* Custom utility classes */
 @layer utilities {
+  /* Hide scrollbar for swipeable containers */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   .text-stat {
     font-size: 48px;
     line-height: 56px;
