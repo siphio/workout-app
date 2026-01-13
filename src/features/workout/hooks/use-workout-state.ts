@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import type { ActiveWorkoutState } from "@/shared/types";
 import { saveWorkoutState, clearWorkoutState } from "../lib/workout-storage";
-import { logSet } from "../actions/workout-actions";
+import { logSet, deleteSetLog } from "../actions/workout-actions";
 
 export function useWorkoutState({ initialState }: { initialState: ActiveWorkoutState | null }) {
   const [state, setState] = useState<ActiveWorkoutState | null>(initialState);
@@ -105,6 +105,35 @@ export function useWorkoutState({ initialState }: { initialState: ActiveWorkoutS
     });
   }, []);
 
+  const deleteSet = useCallback(async (exerciseIndex: number, setIndex: number) => {
+    if (!state) return;
+    const exercise = state.exercises[exerciseIndex];
+    if (exercise.sets.length <= 1) return; // Don't delete last set
+
+    const setToDelete = exercise.sets[setIndex];
+
+    // Optimistic update
+    setState((prev) => {
+      if (!prev) return null;
+      const newExercises = [...prev.exercises];
+      const newSets = prev.exercises[exerciseIndex].sets
+        .filter((_, idx) => idx !== setIndex)
+        .map((set, idx) => ({ ...set, setNumber: idx + 1 })); // Renumber sets
+      newExercises[exerciseIndex] = { ...prev.exercises[exerciseIndex], sets: newSets };
+      return { ...prev, exercises: newExercises };
+    });
+
+    // If set was already logged to database, delete it there too
+    if (setToDelete.id) {
+      try {
+        await deleteSetLog(setToDelete.id);
+      } catch (error) {
+        console.error("Failed to delete set from database:", error);
+        // Could rollback here, but for MVP we'll just log the error
+      }
+    }
+  }, [state]);
+
   const calculateTotalVolume = useCallback(() => {
     if (!state) return 0;
     return state.exercises.reduce((total, ex) =>
@@ -126,6 +155,7 @@ export function useWorkoutState({ initialState }: { initialState: ActiveWorkoutS
     updateSetValue,
     completeSet,
     addSet,
+    deleteSet,
     calculateTotalVolume,
     isWorkoutComplete,
     clearWorkout: useCallback(() => { clearWorkoutState(); setState(null); }, []),

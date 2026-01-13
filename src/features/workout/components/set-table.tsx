@@ -8,12 +8,14 @@ interface Props {
   onWeightChange: (setIndex: number, value: number | null) => void;
   onRepsChange: (setIndex: number, value: number | null) => void;
   onCompleteSet: (setIndex: number) => void;
+  onDeleteSet: (setIndex: number) => void;
   onAddSet: () => void;
   weightUnit?: string;
 }
 
-export function SetTable({ exercise, onWeightChange, onRepsChange, onCompleteSet, onAddSet, weightUnit = "KG" }: Props) {
+export function SetTable({ exercise, onWeightChange, onRepsChange, onCompleteSet, onDeleteSet, onAddSet, weightUnit = "KG" }: Props) {
   const activeSetIndex = exercise.sets.findIndex((s) => !s.isCompleted);
+  const canDeleteSets = exercise.sets.length > 1;
 
   return (
     <div>
@@ -37,6 +39,8 @@ export function SetTable({ exercise, onWeightChange, onRepsChange, onCompleteSet
             onWeightChange={(val) => onWeightChange(idx, val)}
             onRepsChange={(val) => onRepsChange(idx, val)}
             onComplete={() => onCompleteSet(idx)}
+            onDelete={() => onDeleteSet(idx)}
+            canDelete={canDeleteSets}
           />
         ))}
       </div>

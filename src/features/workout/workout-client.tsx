@@ -22,7 +22,7 @@ export function WorkoutClient({ initialState, userSettings }: Props) {
   const router = useRouter();
   const [isCompleting, setIsCompleting] = useState(false);
 
-  const { state, currentExercise, nextExercise, prevExercise, updateSetValue, completeSet, addSet, calculateTotalVolume, isWorkoutComplete } = useWorkoutState({ initialState });
+  const { state, currentExercise, nextExercise, prevExercise, updateSetValue, completeSet, addSet, deleteSet, calculateTotalVolume, isWorkoutComplete } = useWorkoutState({ initialState });
   const { formattedTime: elapsedTime, isPaused, togglePause } = useElapsedTime(state?.startedAt ?? null);
   const restTimer = useRestTimer({
     defaultRestSeconds: currentExercise?.rest_seconds ?? userSettings.defaultRestSeconds,
@@ -67,6 +67,7 @@ export function WorkoutClient({ initialState, userSettings }: Props) {
           onWeightChange={(idx, val) => updateSetValue(state.currentExerciseIndex, idx, "weight", val)}
           onRepsChange={(idx, val) => updateSetValue(state.currentExerciseIndex, idx, "reps", val)}
           onCompleteSet={handleCompleteSet}
+          onDeleteSet={(idx) => deleteSet(state.currentExerciseIndex, idx)}
           onAddSet={() => addSet(state.currentExerciseIndex)}
           weightUnit={userSettings.weightUnit.toUpperCase()}
         />

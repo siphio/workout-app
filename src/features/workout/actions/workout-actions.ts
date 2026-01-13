@@ -96,6 +96,18 @@ export async function updateSet(setLogId: string, weight: number, reps: number):
   return data as SetLog;
 }
 
+export async function deleteSetLog(setLogId: string): Promise<{ success: boolean }> {
+  const supabase = await createClient();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error } = await (supabase as any)
+    .from("set_logs")
+    .delete()
+    .eq("id", setLogId);
+
+  if (error) throw new Error(error.message);
+  return { success: true };
+}
+
 export async function completeWorkout(
   workoutLogId: string,
   totalVolume: number,

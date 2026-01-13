@@ -1,11 +1,44 @@
+"use client";
+
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
+
 export default function HomePage() {
+  const router = useRouter();
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
   // Temporarily hardcoded for testing
   const cyclePosition = 0;
   const workoutDays = ["PUSH", "PULL", "LEGS", "REST"];
   const currentDay = workoutDays[cyclePosition];
 
+  const SWIPE_THRESHOLD = 80;
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    // Swipe left (positive diff) → go to Progress
+    if (diff > SWIPE_THRESHOLD) {
+      router.push("/progress");
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-zinc-950 relative overflow-hidden">
+    <main
+      className="min-h-screen bg-zinc-950 relative overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Hero Background - Full screen with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-emerald-950/30">
         {/* Geometric pattern */}
@@ -14,6 +47,12 @@ export default function HomePage() {
           <div className="absolute top-[25%] right-[20%] w-32 h-32 bg-emerald-900/40 rotate-12 rounded-sm" />
           <div className="absolute top-[45%] left-[35%] w-24 h-24 bg-zinc-800/40 -rotate-12 rounded-sm" />
         </div>
+      </div>
+
+      {/* Swipe hint - right edge */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1 text-zinc-600 pr-2">
+        <ChevronLeft className="w-5 h-5 animate-pulse" />
+        <span className="text-xs uppercase tracking-wider rotate-90 origin-left translate-x-4">Progress</span>
       </div>
 
       {/* Floating Bottom Card */}
